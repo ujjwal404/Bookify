@@ -167,6 +167,7 @@ function Dashboard() {
                   description={post.about}
                   author={post.author}
                   imageUrl={post.imageURL}
+                  rating={post.rating}
                 />
               ))}
             </div>

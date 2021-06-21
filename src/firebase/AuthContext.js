@@ -1,5 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
 import app from './config';
+import firebase from 'firebase';
 
 const AuthContext = React.createContext();
 
@@ -19,13 +20,15 @@ export function AuthProvider({ children }) {
     return app.auth().signInWithEmailAndPassword(email, password);
   }
 
-  function googleLogin() {
-    var provider = new app.auth.GoogleAuthProvider();
-    return app
+  async function googleLogin() {
+    var provider = new firebase.auth.GoogleAuthProvider();
+    await firebase
       .auth()
       .signInWithPopup(provider)
       .then((user) => {
         setCurrentUser(user);
+        console.log(user);
+        console.log('user signed In');
       })
       .catch((error) => {
         console.log(error.message);
@@ -33,15 +36,17 @@ export function AuthProvider({ children }) {
   }
 
   function logout() {
+    console.log('user signed out');
     return app.auth().signOut();
   }
 
   useEffect(() => {
-    // const unsubscribe = app.auth().onAuthStateChanged((user) => {
-    //   setCurrentUser(user);
-    //   setLoading(false);
-    // });
-    // return unsubscribe;
+    const unsubscribe = app.auth().onAuthStateChanged((user) => {
+      setCurrentUser(user);
+      console.log('inside use effect', user);
+      setLoading(false);
+    });
+    return unsubscribe;
   }, []);
 
   const value = {
@@ -51,6 +56,6 @@ export function AuthProvider({ children }) {
     googleLogin,
     logout
   };
-  return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
+  return <AuthContext.Provider value={value}>{!loading && children}</AuthContext.Provider>;
 }
 // !loading && children

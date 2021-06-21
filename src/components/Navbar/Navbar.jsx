@@ -1,7 +1,21 @@
 import React from 'react';
+import { useHistory } from 'react-router';
+import { useAuth } from '../../firebase/AuthContext';
 import './navbar.scss';
 
 function Navbar() {
+  const { logout } = useAuth();
+  const history = useHistory();
+
+  async function SignOutClick() {
+    try {
+      await logout();
+      history.push('/auth');
+    } catch {
+      console.log('failed to logout');
+    }
+  }
+
   return (
     <nav className="header">
       <div className="browse">
@@ -12,9 +26,9 @@ function Navbar() {
             viewBox="0 0 24 24"
             fill="none"
             stroke="currentColor"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
             className="feather feather-chevron-down"
           >
             <path d="M6 9l6 6 6-6" />
@@ -35,14 +49,16 @@ function Navbar() {
             viewBox="0 0 24 24"
             fill="none"
             stroke="currentColor"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
             className="feather feather-menu"
           >
             <path d="M3 12h18M3 6h18M3 18h18" />
           </svg>
-          Menu
+          <div onClick={() => SignOutClick()} style={{ cursor: 'pointer' }}>
+            LogOut
+          </div>
         </div>
       </div>
     </nav>

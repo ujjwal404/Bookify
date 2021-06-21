@@ -6,7 +6,6 @@
   border-radius: 4px;
   display: flex;
   flex-direction: column;
-  cursor: pointer;
   padding: 0 0 20px 20px;
   color: var(--body-color-light);
 }
@@ -79,6 +78,19 @@
   line-height: 1.6em;
   -webkit-line-clamp: 4;
   margin-top: 15px;
+}
+
+.book-see-post {
+  margin-top: 25px;
+  text-align: center;
+  background-color: #eee;
+  color: #fbadaf;
+  font-weight: 600;
+  padding: 8px;
+  font-size: 14px;
+  width: 160px;
+  border-radius: 20px;
+  cursor: pointer;
 }
 
 .content-wrapper {
