@@ -12,10 +12,11 @@ export default function BuyBook({ trigger, details }) {
 
   async function addtoCart() {
     let present_books = [];
+
     // if there's no cart then create a cart
     var UserRef = db.collection('Users').doc(`${currentUser.uid}`);
     await UserRef.get().then((doc) => {
-      if (!doc.data().cart) UserRef.set({ cart: [] });
+      if (!doc.data()) UserRef.set({ cart: [] });
       else present_books = doc.data().cart;
     });
 

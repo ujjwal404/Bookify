@@ -17,7 +17,7 @@ function Cart({ trigger }) {
       .doc(`${currentUser.uid}`)
       .get()
       .then((doc) => {
-        if (!doc.data().cart) setItems([]);
+        if (!doc.data()) setItems([]);
         else present_books = doc.data().cart;
       });
     const arr = [];
@@ -32,7 +32,7 @@ function Cart({ trigger }) {
         });
         setItems(arr);
       });
-  }, []);
+  }, [items]);
 
   return (
     <Popup trigger={trigger} position={'bottom'}>
