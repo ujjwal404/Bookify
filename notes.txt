@@ -1,8 +1,4 @@
-// implement a modal for adding products to cart
-https://codesandbox.io/s/eloquent-hamilton-vgbyq?file=/src/component.js
-
-// add to cart animation button
-https://codepen.io/aaroniker/pen/pogGgbx
+// TODO: 
 
 // auth UI
 https://codepen.io/khadkamhn/pen/ZGvPLo
