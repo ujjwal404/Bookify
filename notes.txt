@@ -1,6 +1,0 @@
-// TODO: 
-
-// auth UI
-https://codepen.io/khadkamhn/pen/ZGvPLo
-
-// implement cart in db
