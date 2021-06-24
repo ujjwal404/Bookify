@@ -13,7 +13,11 @@ function Dashboard() {
 
   useEffect(() => {
     getBooks().then((snapshot) => {
-      const data = snapshot.docs.map((doc) => doc.data());
+      const data = snapshot.docs.map((doc) => {
+        const details = doc.data();
+        const id = doc.id;
+        return { ...details, id };
+      });
       setbooks(data);
     });
   }, []);
@@ -168,6 +172,8 @@ function Dashboard() {
                   author={post.author}
                   imageUrl={post.imageURL}
                   rating={post.rating}
+                  bookid={post.id}
+                  price={post.price}
                 />
               ))}
             </div>

@@ -83,7 +83,7 @@
 .book-see-post {
   margin-top: 25px;
   text-align: center;
-  background-color: #eee;
+  background-color: #f2f2f2;
   color: #fbadaf;
   font-weight: 600;
   padding: 8px;
@@ -91,6 +91,9 @@
   width: 160px;
   border-radius: 20px;
   cursor: pointer;
+  &:hover {
+    color: #ff6e72;
+  }
 }
 
 .content-wrapper {

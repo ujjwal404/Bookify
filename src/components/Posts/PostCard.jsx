@@ -1,7 +1,14 @@
-import React from 'react';
+import React, { useState } from 'react';
+import BuyBook from '../BuyBookModal/BuyBook';
 import './PostCard.scss';
 
-function PostCard({ title, description, imageUrl, author }) {
+function PostCard({ title, description, imageUrl, author, bookid, price }) {
+  const details = { title, description, imageUrl, author, bookid, price };
+
+  function trigger() {
+    return <div className="book-see-post">See The Book</div>;
+  }
+
   return (
     <>
       <div className="book-card">
@@ -26,7 +33,7 @@ function PostCard({ title, description, imageUrl, author }) {
               <span className="book-voters card-vote">1.987 voters</span>
             </div>
             <div className="book-sum card-sum">{description}</div>
-            <div className="book-see-post">See The Book</div>
+            <BuyBook trigger={trigger} details={details} />
           </div>
         </div>
       </div>

@@ -105,9 +105,22 @@
     @extend %display;
     border-left: 1px solid var(--border-color);
   }
-  svg {
-    width: 16px;
-    margin: 0 8px 0 15px;
-    flex-shrink: 0;
+}
+
+.logout-btn {
+  padding-left: 10px;
+  cursor: pointer;
+
+  &:hover {
+    color: #000;
   }
+}
+
+.checkout-cart {
+  img {
+    height: 30px;
+    margin: 0px 10px;
+    margin-right: 20px;
+  }
+  cursor: pointer;
 }
