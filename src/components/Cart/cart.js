@@ -38,9 +38,7 @@ function Cart({ trigger }) {
     <Popup trigger={trigger} position={'bottom'}>
       <div className="cart-dropdown">
         <div className="dropdown-items">
-          {items.map((post) => (
-            <div className="dropdown-item">{post.name}</div>
-          ))}
+          {items && items.map((post) => <div className="dropdown-item">{post.name}</div>)}
         </div>
         <div className="checkout-btn">
           <span>Checkout</span>
