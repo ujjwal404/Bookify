@@ -4,7 +4,7 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 ## Setup Firebase
 
-To run this project locally, create a project on firebase console, turn on firebase google authentication and cloud firestore, get your firebase config object and create env variable for config.js file. Put your values from your config object in a .env file; Refer to .env.example file for sample format.
+To run this project locally, create a project on firebase console, turn on firebase google authentication and cloud firestore, get your firebase config object and create environment variable for config.js file. Put your values from your config object in a .env file; Refer to .env.example file for sample format.
 
 ## Available Scripts
 

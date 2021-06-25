@@ -4,21 +4,43 @@ import Navbar from '../Navbar/Navbar';
 import PostCard from '../Posts/PostCard';
 import './dashboard.scss';
 import { POSTS } from '../../constants/constants';
+import { store } from 'react-notifications-component';
 
 import { useFirestore } from '../../firebase/DBcontext';
+import { useHistory } from 'react-router';
 
 function Dashboard() {
   const [books, setbooks] = useState([]);
   const { getBooks } = useFirestore();
+  const history = useHistory();
 
   useEffect(() => {
-    getBooks().then((snapshot) => {
-      const data = snapshot.docs.map((doc) => {
-        const details = doc.data();
-        const id = doc.id;
-        return { ...details, id };
-      });
-      setbooks(data);
+    getBooks()
+      .then((snapshot) => {
+        const data = snapshot.docs.map((doc) => {
+          const details = doc.data();
+          const id = doc.id;
+          return { ...details, id };
+        });
+        setbooks(data);
+      })
+      .catch((error) =>
+        store.addNotification({
+          title: 'Unable to Fetch books',
+          message: 'FirebaseError : Quota exceeded',
+          type: 'danger',
+          insert: 'top',
+          container: 'top-right',
+          animationIn: ['animate__animated', 'animate__fadeIn'],
+          animationOut: ['animate__animated', 'animate__fadeOut'],
+          dismiss: {
+            duration: 4000
+          }
+        })
+      );
+
+    window.addEventListener('popstate', () => {
+      history.go(1);
     });
   }, []);
 

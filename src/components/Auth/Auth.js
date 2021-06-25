@@ -9,9 +9,8 @@ function Auth() {
   async function onGoogleClick(e) {
     e.preventDefault();
     try {
-      history.push('/');
       await googleLogin();
-      history.push('/');
+      history.push('/dashboard');
     } catch {
       console.log('failed to login with google');
     }
