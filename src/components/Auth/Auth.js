@@ -3,11 +3,14 @@ import { useHistory } from 'react-router';
 import { useAuth } from '../../firebase/AuthContext';
 import './auth.scss';
 import image from './auth.svg';
-import icon from './favicon.png';
+import { store } from 'react-notifications-component';
 
 function Auth() {
   const [show, setShow] = useState('login');
-  const { googleLogin } = useAuth();
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [confirm, setConfirm] = useState('');
+  const { googleLogin, login, signup } = useAuth();
   const history = useHistory();
 
   async function onGoogleClick(e) {
@@ -16,7 +19,74 @@ function Auth() {
       await googleLogin();
       history.push('/dashboard');
     } catch {
-      console.log('failed to login with google');
+      store.addNotification({
+        title: 'Login Failed',
+        message: 'Unable to login with Google',
+        type: 'danger',
+        insert: 'top',
+        container: 'top-right',
+        animationIn: ['animate__animated', 'animate__fadeIn'],
+        animationOut: ['animate__animated', 'animate__fadeOut'],
+        dismiss: {
+          duration: 3000
+        }
+      });
+    }
+  }
+
+  async function handleSubmit(e) {
+    e.preventDefault();
+    if (email === '' || password === '') {
+      store.addNotification({
+        title: "Email or Password can't be blank",
+        message: 'Please try again',
+        type: 'warning',
+        insert: 'top',
+        container: 'top-right',
+        animationIn: ['animate__animated', 'animate__fadeIn'],
+        animationOut: ['animate__animated', 'animate__fadeOut'],
+        dismiss: {
+          duration: 3000
+        }
+      });
+      return;
+    }
+    try {
+      if (show === 'login') {
+        await login(email, password);
+        history.push('/dashboard');
+      } else {
+        if (password != confirm) {
+          store.addNotification({
+            title: "Passwords don't match",
+            message: 'Please make sure your passwords match',
+            type: 'warning',
+            insert: 'top',
+            container: 'top-right',
+            animationIn: ['animate__animated', 'animate__fadeIn'],
+            animationOut: ['animate__animated', 'animate__fadeOut'],
+            dismiss: {
+              duration: 3000
+            }
+          });
+          return;
+        }
+        await signup(email, password);
+        history.push('/dashboard');
+      }
+    } catch {
+      store.addNotification({
+        title: 'No user found',
+        message: 'Please check your email or password',
+        type: 'info',
+        insert: 'top',
+        container: 'top-right',
+        animationIn: ['animate__animated', 'animate__fadeIn'],
+        animationOut: ['animate__animated', 'animate__fadeOut'],
+        dismiss: {
+          duration: 3000
+        }
+      });
     }
   }
   return (
@@ -54,19 +124,44 @@ function Auth() {
             <div className="form-inputs">
               {show === 'login' ? (
                 <>
-                  <input type="text" placeholder="email address" />
-                  <input type="password" placeholder="Password" />
+                  <input
+                    type="text"
+                    placeholder="E-mail Address"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                  />
+                  <input
+                    type="password"
+                    placeholder="Password"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                  />
                 </>
               ) : (
                 <>
-                  <input type="text" placeholder="email address" />
-                  <input type="password" placeholder="Password" />
-                  <input type="password" placeholder="confirm Password" />
+                  <input
+                    type="text"
+                    placeholder="E-mail Address"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                  />
+                  <input
+                    type="password"
+                    placeholder="Password"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                  />
+                  <input
+                    type="password"
+                    placeholder="Confirm Password"
+                    value={confirm}
+                    onChange={(e) => setConfirm(e.target.value)}
+                  />
                 </>
               )}
             </div>
             <div className="submit-btn">
-              <button>{show}</button>
+              <button onClick={(e) => handleSubmit(e)}>{show}</button>
             </div>
             <div className="extra-options">
               or {show} with

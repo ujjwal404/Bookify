@@ -28,7 +28,6 @@ export function AuthProvider({ children }) {
       .then((user) => {
         setCurrentUser(user);
         console.log(user);
-        console.log('user signed In');
       })
       .catch((error) => {
         console.log(error.message);
@@ -36,14 +35,12 @@ export function AuthProvider({ children }) {
   }
 
   function logout() {
-    console.log('user signed out');
     return app.auth().signOut();
   }
 
   useEffect(() => {
     const unsubscribe = app.auth().onAuthStateChanged((user) => {
       setCurrentUser(user);
-      console.log('inside use effect', user);
       setLoading(false);
     });
     return unsubscribe;
