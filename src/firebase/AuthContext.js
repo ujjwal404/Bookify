@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react';
 import app from './config';
 import firebase from 'firebase';
+import { store } from 'react-notifications-component';
 
 const AuthContext = React.createContext();
 
@@ -27,10 +28,48 @@ export function AuthProvider({ children }) {
       .signInWithPopup(provider)
       .then((user) => {
         setCurrentUser(user);
-        console.log(user);
       })
       .catch((error) => {
-        console.log(error.message);
+        store.addNotification({
+          title: 'Login Failed',
+          message: error.message,
+          type: 'danger',
+          insert: 'top',
+          container: 'top-right',
+          animationIn: ['animate__animated', 'animate__fadeIn'],
+          animationOut: ['animate__animated', 'animate__fadeOut'],
+          dismiss: {
+            duration: 0,
+            showIcon: true
+          }
+        });
+      });
+  }
+
+  async function githubLogin() {
+    var provider = new firebase.auth.GithubAuthProvider();
+    await firebase
+      .auth()
+      .signInWithPopup(provider)
+      .then((result) => {
+        var user = result.user;
+        console.log(user, 'github user');
+        setCurrentUser(user);
+      })
+      .catch((error) => {
+        store.addNotification({
+          title: 'Login Failed',
+          message: error.message,
+          type: 'danger',
+          insert: 'top',
+          container: 'top-right',
+          animationIn: ['animate__animated', 'animate__fadeIn'],
+          animationOut: ['animate__animated', 'animate__fadeOut'],
+          dismiss: {
+            duration: 0,
+            showIcon: true
+          }
+        });
       });
   }
 
@@ -48,6 +87,7 @@ export function AuthProvider({ children }) {
 
   const value = {
     currentUser,
+    githubLogin,
     signup,
     login,
     googleLogin,

@@ -121,9 +121,13 @@
   padding: 5px;
   border-radius: 100px;
   margin-left: 10px;
-  img {
-    height: 25px;
-    width: auto;
+  .img-google {
+    width: 26px;
+    height: 26px;
+  }
+  .img-github {
+    width: 30px;
+    height: 28px;
   }
 }
 .firebase-logo {

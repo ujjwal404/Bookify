@@ -10,13 +10,34 @@ function Auth() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirm, setConfirm] = useState('');
-  const { googleLogin, login, signup } = useAuth();
+  const { googleLogin, login, signup, githubLogin } = useAuth();
   const history = useHistory();
 
   async function onGoogleClick(e) {
     e.preventDefault();
     try {
       await googleLogin();
+      history.push('/dashboard');
+    } catch {
+      store.addNotification({
+        title: 'Login Failed',
+        message: 'Unable to login with Google',
+        type: 'danger',
+        insert: 'top',
+        container: 'top-right',
+        animationIn: ['animate__animated', 'animate__fadeIn'],
+        animationOut: ['animate__animated', 'animate__fadeOut'],
+        dismiss: {
+          duration: 3000
+        }
+      });
+    }
+  }
+
+  async function onGithubClick(e) {
+    e.preventDefault();
+    try {
+      await githubLogin();
       history.push('/dashboard');
     } catch {
       store.addNotification({
@@ -138,7 +159,7 @@ function Auth() {
                   />
                 </>
               ) : (
-                <>
+                <form>
                   <input
                     type="text"
                     placeholder="E-mail Address"
@@ -157,7 +178,7 @@ function Auth() {
                     value={confirm}
                     onChange={(e) => setConfirm(e.target.value)}
                   />
-                </>
+                </form>
               )}
             </div>
             <div className="submit-btn">
@@ -166,7 +187,16 @@ function Auth() {
             <div className="extra-options">
               or {show} with
               <div onClick={(e) => onGoogleClick(e)} className="google">
-                <img src="https://www.vectorlogo.zone/logos/google/google-icon.svg" />
+                <img
+                  src="https://www.vectorlogo.zone/logos/google/google-icon.svg"
+                  className="img-google"
+                />
+              </div>
+              <div onClick={(e) => onGithubClick(e)} className="google">
+                <img
+                  src="https://img.icons8.com/ios-glyphs/240/000000/github.png"
+                  className="img-github"
+                />
               </div>
             </div>
           </div>
