@@ -2,9 +2,9 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Setup Firebase
+## Setup Firebase <img align="left" alt="firebase" width="34px" src="https://raw.githubusercontent.com/github/explore/80688e429a7d4ef2fca1e82350fe8e3517d3494d/topics/firebase/firebase.png" />
 
-To run this project locally, create a project on firebase console, turn on firebase google authentication and cloud firestore, get your firebase config object and create environment variable for config.js file. Put your values from your config object in a .env file; Refer to .env.example file for sample format.
+To run this project locally, create a project on firebase console, turn on firebase google authentication and cloud firestore, get your firebase config object and create environment variables for config.js file. Put your key-values from your config object in a .env file; Refer to .env.example file for sample format.
 
 ## Available Scripts
 
