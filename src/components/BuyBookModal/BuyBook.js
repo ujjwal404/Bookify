@@ -81,7 +81,7 @@ export default function BuyBook({ trigger, details }) {
         </div>
         <div className="details-card">
           <div className="modal-book-title">
-            <span>{details.title} </span>
+            <span>{details.title || details.name} </span>
           </div>
           <div className="modal-book-author">
             <span> by {details.author}</span>

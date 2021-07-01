@@ -11,12 +11,7 @@ export function useFirestore() {
 export function FirestoreProvider({ children }) {
   const db = app.firestore();
 
-  function getBooks() {
-    return app.firestore().collection('Books').get();
-  }
-
   const value = {
-    getBooks,
     db
   };
   return <DBContext.Provider value={value}>{children}</DBContext.Provider>;

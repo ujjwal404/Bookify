@@ -11,11 +11,13 @@ import { useHistory } from 'react-router';
 
 function Dashboard() {
   const [books, setbooks] = useState([]);
-  const { getBooks } = useFirestore();
+  const { db } = useFirestore();
   const history = useHistory();
 
   useEffect(() => {
-    getBooks()
+    const unsubscribe = db
+      .collection('Books')
+      .get()
       .then((snapshot) => {
         const data = snapshot.docs.map((doc) => {
           const details = doc.data();
@@ -42,6 +44,7 @@ function Dashboard() {
     window.addEventListener('popstate', () => {
       history.go(1);
     });
+    return unsubscribe;
   }, []);
 
   return (
@@ -165,7 +168,7 @@ function Dashboard() {
           <div className="popular-books">
             <div className="main-menu">
               <div className="genre">Popular by Genre</div>
-              <div className="book-types">
+              {/* <div className="book-types">
                 <a href="#" className="book-type active">
                   All Genres
                 </a>
@@ -184,7 +187,7 @@ function Dashboard() {
                 <a href="#" className="book-type">
                   Biography
                 </a>
-              </div>
+              </div> */}
             </div>
             <div className="book-cards">
               {books.map((post) => (

@@ -134,12 +134,12 @@ function Auth() {
             </div>
 
             <div className="auth-btn-row">
-              <div className="login-auth auth-tab" onClick={() => setShow('login')}>
+              <button className="login-auth auth-tab" onClick={() => setShow('login')}>
                 Login
-              </div>
-              <div className="register-auth auth-tab" onClick={() => setShow('register')}>
+              </button>
+              <button className="register-auth auth-tab" onClick={() => setShow('register')}>
                 Register
-              </div>
+              </button>
             </div>
 
             <div className="form-inputs">
