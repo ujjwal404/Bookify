@@ -1,0 +1,89 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;1,100;1,300;1,400&display=swap');
+
+.popup-modal-sell {
+	height: 600px;
+	width: 800px;
+	background-color: #f5fffa;
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	-webkit-transform: translate(-50%, -50%);
+	transform: translate(-50%, -50%);
+	border-radius: 10px;
+	display: flex;
+	box-shadow: 5px 5px 10px rgb(198, 198, 198);
+	-ms-user-select: none;
+	user-select: none;
+	-moz-user-select: none;
+	-khtml-user-select: none;
+	-webkit-user-select: none;
+	-o-user-select: none;
+}
+.sell-form {
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	padding: 20px;
+}
+.sell-form-title {
+	font-family: 'Lato', sans-serif;
+	font-size: 90px;
+	font-weight: 700;
+	color: #f86d72;
+	margin-bottom: 20px;
+}
+.sell-form {
+	input {
+		width: 100%;
+		height: 40px;
+		border-radius: 5px;
+		border: 1px solid #ccc;
+		padding: 0 10px;
+		margin-bottom: 10px;
+	}
+}
+
+.sell--btn {
+	background-color: #111;
+	color: white;
+	font-size: 20px;
+	border-radius: 8px;
+	cursor: pointer;
+	padding: 10px;
+	margin-top: 20px;
+	width: 200px;
+	text-transform: capitalize;
+
+	.btn-text {
+		-webkit-user-select: none;
+		-moz-user-select: none;
+		-ms-user-select: none;
+		user-select: none;
+		display: inline-block;
+		-webkit-transform: translateY(8px);
+		transform: translateY(8px);
+	}
+
+	img {
+		opacity: 1.2;
+		-webkit-filter: brightness(10px);
+		filter: brightness(10px);
+		-webkit-transform: translateZ(10px);
+		transform: translateZ(10px);
+		height: 40px;
+		float: right;
+	}
+
+	&:hover {
+		-webkit-transform: translateY(-5px);
+		transform: translateY(-5px);
+		transition: all 0.3s ease-out;
+		box-shadow: 10px 10px 10px rgb(198, 198, 198);
+	}
+	&:active {
+		-webkit-transform: translateY(5px);
+		transform: translateY(5px);
+	}
+}
