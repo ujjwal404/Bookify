@@ -1,28 +1,34 @@
 import React from 'react';
 import Popup from 'reactjs-popup';
 import { useFirestore } from '../../firebase/DBcontext';
+import { useAuth } from '../../firebase/AuthContext';
 import './sellbook.scss';
 
 function SellBook({ trigger }) {
 	const { db } = useFirestore();
+	const { currentUser } = useAuth();
 
 	function sellBook(e) {
 		e.preventDefault();
 		let book = {
-			title: e.target.title.value,
-			description: e.target.description.value,
-			imageUrl: e.target.imageUrl.value,
+			name: e.target.title.value,
+			about: e.target.description.value,
+			imageURL: e.target.imageUrl.value,
 			author: e.target.author.value,
 			price: e.target.price.value,
 			contact: e.target.contact.value,
-			location: e.target.location.value
+			location: e.target.location.value,
+			user: currentUser.uid
 		};
-		try {
-			db.collection('old-books').add(book);
-		} catch (error) {
-			console.log(error);
-		}
-		console.log(book);
+		db.collection('Old-books')
+			.add(book)
+			.then((docRef) => {
+				console.log('Document written with ID: ', docRef.id);
+			})
+			.catch((error) => {
+				console.error('Error adding document: ', error);
+			});
+		//	console.log(book);
 	}
 
 	return (

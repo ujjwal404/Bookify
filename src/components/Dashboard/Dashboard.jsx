@@ -11,6 +11,7 @@ import { useHistory } from 'react-router';
 
 function Dashboard() {
 	const [books, setbooks] = useState([]);
+	const [Oldbooks, setOldbooks] = useState([]);
 	const { db } = useFirestore();
 	const history = useHistory();
 
@@ -25,6 +26,39 @@ function Dashboard() {
 					return { ...details, id };
 				});
 				setbooks(data);
+			})
+			.catch((error) =>
+				store.addNotification({
+					title: 'Unable to Fetch books',
+					message: 'FirebaseError : Quota exceeded',
+					type: 'danger',
+					insert: 'top',
+					container: 'top-right',
+					animationIn: ['animate__animated', 'animate__fadeIn'],
+					animationOut: ['animate__animated', 'animate__fadeOut'],
+					dismiss: {
+						duration: 4000
+					}
+				})
+			);
+
+		window.addEventListener('popstate', () => {
+			history.go(1);
+		});
+		return unsubscribe;
+	}, []);
+
+	useEffect(() => {
+		const unsubscribe = db
+			.collection('Old-books')
+			.get()
+			.then((snapshot) => {
+				const data = snapshot.docs.map((doc) => {
+					const details = doc.data();
+					const id = doc.id;
+					return { ...details, id };
+				});
+				setOldbooks(data);
 			})
 			.catch((error) =>
 				store.addNotification({
@@ -199,11 +233,28 @@ function Dashboard() {
 									rating={post.rating}
 									bookid={post.id}
 									price={post.price}
+									isOldBook={false}
 								/>
 							))}
 						</div>
 						<div className="main-menu">
 							<div className="genre">Used books</div>
+						</div>
+						<div className="book-cards">
+							{Oldbooks.map((post) => (
+								<PostCard
+									title={post.name}
+									description={post.about}
+									author={post.author}
+									imageUrl={post.imageURL}
+									rating={post.rating}
+									bookid={post.id}
+									price={post.price}
+									contact={post.contact}
+									location={post.location}
+									isOldBook={true}
+								/>
+							))}
 						</div>
 					</div>
 				</div>

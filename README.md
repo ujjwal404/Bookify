@@ -1,9 +1,10 @@
 # Bookify 📚
 
-Bookify is a platform to buy and sell books. Users can sell their books on the platform and they can also buy both old and new books 📖.
-Users can login on the platform using google auth, email or github.
+Bookify is a platform to buy and sell books. Users can sell their books on the platform and they can also buy both old and new books 📖. Users can login on the platform using google auth, email or github.
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app) and styled with [Sass](https://sass-lang.com).
+
+UI source : https://codepen.io/TurkAysenur/pen/JjGKKrP
 
 ## Project Setup <img alt="firebase" width="34px" src="https://raw.githubusercontent.com/github/explore/80688e429a7d4ef2fca1e82350fe8e3517d3494d/topics/firebase/firebase.png" />
 
